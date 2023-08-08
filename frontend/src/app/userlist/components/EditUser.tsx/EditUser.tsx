@@ -42,7 +42,6 @@ function editUser() {
     const formData = new FormData();
     formData.append('image', atualUserEditing.image instanceof File ? atualUserEditing.image : '')
     formData.append('name', atualUserEditing.name);
-    formData.append('days', atualUserEditing.days.toFixed());
     formData.append('hiring', atualUserEditing.hiring);
     const id = atualUserEditing._id
     // Call your function to handle form submission

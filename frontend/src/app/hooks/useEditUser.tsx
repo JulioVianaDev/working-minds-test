@@ -1,4 +1,6 @@
 export async function useEditUser({formData,id}:{id: string,formData: FormData}) {
+  console.log(formData)
+  console.log(id)
   try {
     const response = await fetch(`http://localhost:8080/users/editUser/${id}`, {
       method: 'PATCH',
@@ -6,7 +8,7 @@ export async function useEditUser({formData,id}:{id: string,formData: FormData})
     });
 
     if (response.ok) {
-      console.log('User created successfully');
+      console.log('User edited successfully');
     } else {
       console.error('Failed to create user');
     }
