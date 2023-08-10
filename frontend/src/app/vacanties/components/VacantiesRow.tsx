@@ -4,6 +4,7 @@ import { useDeleteUser } from '@/app/hooks/useDeleteUser';
 import { GlobalContextProvider, useGlobalContext } from '@/app/context/store';
 import { EDIT_USER_TYPE } from '@/app/context/typesPages';
 import { NEW_VACANTY_TYPE } from '@/app/context/typesVacantis';
+import { useDeleteVacanty } from '@/app/hooks/useDeleteVacanty';
 
 const roboto = Roboto({weight: "500",subsets: ["latin"], style: "normal"})
 const inter = Inter({weight: "400",subsets: ["latin"],style: "normal"})
@@ -11,11 +12,14 @@ const inter = Inter({weight: "400",subsets: ["latin"],style: "normal"})
 export interface User {
   _id: string,
   name: string,
-  hiring: string,
+  start: string,
+  end: string,
   days: number,
   imageUrl: string,
+  userName: string,
   createdAt: string,
-  __v: number
+  __v: number,  
+  deleteOfState: (id: string) => void;
 }
 
 
@@ -23,13 +27,8 @@ const UserRow: React.FC<User> = (props:User) => {
   const [isSelected,setIsSelected] = useState(false)
   const [rowSelected,setRowSelected] = useState(false)
   const [modalDelete,setModalDelete] = useState(false)
-  const dateObject = new Date(props.hiring);
   const {setDashboardPage,setTextNavTop,} = useGlobalContext()
-  const day = dateObject.getUTCDate().toString().padStart(2, '0');
-  const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-  const year = dateObject.getUTCFullYear();
   
-  const formattedDate = `${day}/${month}/${year}`;
   // refatorar depois
   const handleCheckboxChange = () => {
     setIsSelected(!isSelected);
@@ -53,7 +52,7 @@ const UserRow: React.FC<User> = (props:User) => {
         />
       </div>
       <div className='flex relative justify-between items-center h-nav-aside w-nome border-b border-borderRow'>
-        <div>{props.name}</div> 
+        <div>{props.userName}</div> 
       </div>
       <div className='flex items-center h-nav-aside w-birth border-b border-borderRow'>{props.days}</div>
     
@@ -89,20 +88,17 @@ const UserRow: React.FC<User> = (props:User) => {
             <div onClick={()=>setRowSelected(false)} className='w-[100vw] fixed h-[100vh] z-20 top-0 left-0'>
 
             </div>
-            <div className=' flex items-center flex-col absolute bg-[#FFF] z-50 top-0 right-0 w-[249px] h-[220px]  '>
+            <div className=' flex items-center border rounded-md border-[#9747FF] justify-center flex-col absolute bg-[#FFF] z-50 top-0 right-0 w-[119px] h-[80px] text-center '>
               <div  
                 onClick={
-                  ()=>{setTextNavTop('Novas Férias');
-                    localStorage.setItem('userId',props._id)
-                    setDashboardPage(NEW_VACANTY_TYPE)
+                  ()=>{
+                    useDeleteVacanty(props._id)
+                    props.deleteOfState(props._id)
                   }
                 } 
-                className={`flex items-center justify-center text-[#9747FF] text-[20px] w-[full] h-[93px] ${inter.className}`}
+                className={`flex items-center justify-center text-[#9747FF] text-[20px] w-[full] h-[full] ${inter.className}`}
               >
-                Cadastrar Férias
-              </div>
-              <div onClick={()=>{}} className={`flex items-center justify-center text-[#6C757D] text-[20px] w-full h-[93px] ${inter.className}`}>
-                Ver férias cadastradas
+                Deletar Férias
               </div>
             </div>
           </>

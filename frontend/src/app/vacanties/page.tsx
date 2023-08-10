@@ -35,8 +35,7 @@ function Dashboard() {
         <div>
           <main className="">
             <NavbarTop/>
-            <ButtonTop/>
-            <div>
+            <div className='mt-[70px]'>
               {currentPageComponent}
             </div>
           </main>

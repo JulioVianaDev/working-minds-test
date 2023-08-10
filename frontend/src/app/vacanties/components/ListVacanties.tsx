@@ -15,6 +15,9 @@ function VacanciesList() {
     let usersApi = useGetVacations().then(res=>setUsers(res))
   },[])
 
+  const deleteOfState=(id:string)=>{
+    setUsers(users.filter(u=>u._id !== id))
+  }
   return (
     <div>
     <div className={`flex items-center ${roboto.className}`}>
@@ -25,7 +28,7 @@ function VacanciesList() {
         <rect x="19.5" y="15.5" width="19" height="19" rx="1.5" fill="white" stroke="#6C757D"/>
         </svg>
       </div>
-      
+      <div className='flex items-center h-nav-aside w-profile border-b-2 border-gray-300'>Profile</div>
       <div className='flex relative justify-between items-center h-nav-aside w-nome border-b-2 border-gray-300'>
         <div>Nome</div> 
         <div className='absolute top-2 right-4'>
@@ -34,14 +37,17 @@ function VacanciesList() {
           </svg>
         </div>
       </div>
-      <div className='flex items-center h-nav-aside w-birth border-b-2 border-gray-300'>Days Free</div>
+      <div className='flex items-center h-nav-aside w-birth border-b-2 border-gray-300'>Dias Gastados</div>
      
       <div className='flex justify-center items-center h-nav-aside w-status border-b-2 border-gray-300'>Status</div>
       <div className='flex justify-center items-center h-nav-aside w-action border-b-2 border-gray-300'>Action</div>
     </div>
+    <div className='overflow-y-scroll h-[500px]'>
+
       {
-        users.map(u=><VacantiesRow key={u._id} {...u}/>)
+        users.map(u=><VacantiesRow key={u._id} {...u} deleteOfState={deleteOfState} />)
       }
+    </div>
     </div>
   )
 }
