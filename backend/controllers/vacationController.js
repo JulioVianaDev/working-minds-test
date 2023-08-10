@@ -31,13 +31,19 @@ module.exports = class VacationController{
       userName,
       imageUrl
     })
-    const user = User.findById(userId)
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found." });
+    }
 
     try {
       await vacancy.save()
-      let subtract = user.days - days
-      user.days = subtract
-      await user.save()
+      user.days -= days;
+
+      // Save the updated user
+      await user.save();
+  
       res.status(201).json({message: "Ferias cadastrada com sucesso",vacancy: vacancy})
     } catch (error) {
       res.status(500).json({message: "Ocorreu um erro ao cadastrar as ferias, tente novamente mais tarde",error})
