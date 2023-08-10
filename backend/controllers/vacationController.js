@@ -13,8 +13,14 @@ module.exports = class VacationController{
       days,
       userId
     }= req.body
-    console.log(req.body)
-   
+    // console.log(req.body)
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const timeDifferenceInDays = Math.ceil((endDate - startDate) / (24 * 60 * 60 * 1000));
+
+    if (timeDifferenceInDays < days - 1) {
+      return res.status(400).json({ message: "Invalid date range. Difference between start and end should be at least 1 day greater than 'days'." });
+    }
     const vacancy = new Vacation({
       start,
       end,
@@ -62,5 +68,9 @@ module.exports = class VacationController{
       console.log(error);
       res.status(500).json({ message: "Erro ao editar o usuário." });
     }
+  }
+  static async getVacationsForUser(req,res){
+    const vacations = await Vacation.find({userId:  req.params.id})
+    res.status(200).json(vacations)
   }
 }

@@ -16,7 +16,7 @@
 
 # deploy configuration:
 
-<img src="./images/working-minds.png>
+<img src="./images/working-minds.png">
 
 
 # Details:

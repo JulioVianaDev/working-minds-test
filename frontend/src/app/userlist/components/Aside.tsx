@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGlobalContext } from '@/app/context/store'
 import { USER_LIST_TYPE } from '@/app/context/typesPages';
-
+import Link from 'next/link';
 function Aside() {
   const {setTextNavTop,setAtualPage} = useGlobalContext();
   return (
@@ -13,7 +13,7 @@ function Aside() {
           <path fillRule="evenodd" clipRule="evenodd" d="M5.83337 8.4917V15H7.50004V10H12.5V15H14.1667V8.4917L10 4.7417L5.83337 8.4917Z" fill="#28A745" fillOpacity="0.3"/>
         </svg>
       </div>
-      <div>Dashboard</div>
+      <div onClick={()=>setTextNavTop('Cadastrar Férias')}><Link href='/dashboard'>Dashboard</Link></div>
     </div>
     <div className='flex w-nav-aside h-nav-aside pl-icons-left items-center'>
       <div  className='mr-icons-right'>
@@ -41,7 +41,7 @@ function Aside() {
         </svg>
 
       </div>
-      <div>User List</div>
+      <div><Link href="/userlist" >User List</Link></div>
     </div>
     <div className='flex w-nav-aside h-nav-aside pl-icons-left items-center'>
       <div  className='mr-icons-right'>

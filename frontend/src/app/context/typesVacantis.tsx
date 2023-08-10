@@ -1,0 +1,3 @@
+export const VACANTY_LIST_TYPE = 'VACANTY_LIST'
+export const EDIT_VACANTY_TYPE = 'EDIT_VACANTY'
+export const NEW_VACANTY_TYPE = 'NEW_VACANTY'

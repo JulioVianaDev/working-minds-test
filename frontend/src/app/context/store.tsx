@@ -3,6 +3,7 @@
 
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 import { USER_LIST_TYPE } from "./typesPages";
+import { NEW_VACANTY_TYPE, VACANTY_LIST_TYPE } from "./typesVacantis";
 
 export interface User {
     _id: string,
@@ -19,6 +20,8 @@ interface ContextProps {
     textNavTop: string,
     setTextNavTop: Dispatch<SetStateAction<string>>,
     setAtualPage: Dispatch<SetStateAction<string>>,
+    setDashboardPage: Dispatch<SetStateAction<string>> ,
+    dashboardAtualPage: string,
     users: User[],
     setUsers: Dispatch<SetStateAction<User[]>>,
     atualPage: string,
@@ -34,6 +37,8 @@ const GlobalContext = createContext<ContextProps>({
     users: [],
     setUsers: (): User[] => [] ,
     atualPage: USER_LIST_TYPE,
+    setDashboardPage:  (): string => '' ,
+    dashboardAtualPage: VACANTY_LIST_TYPE,
     setAtualPage: (): string => '',
     isEditing: false,
     setIsEditing: ()=>{},
@@ -44,11 +49,13 @@ const GlobalContext = createContext<ContextProps>({
 export const GlobalContextProvider = ({ children }:any) => {
     const [textNavTop, setTextNavTop] = useState('User List');
     const [atualPage, setAtualPage] = useState(USER_LIST_TYPE);
+    const [dashboardAtualPage, setDashboardPage] = useState(VACANTY_LIST_TYPE);
     const [users, setUsers] = useState<[] | User[]>([]);
     const [isEditing,setIsEditing] = useState(false)
+    
     const [atualUserEditing,setAtualUserEditin] = useState<User>({_id: '',name: '',hiring: '',days:0,image: '', createdAt: '',  __v: 0,imageUrl: '',})
     return (
-        <GlobalContext.Provider value={{ textNavTop, setTextNavTop, users, setUsers,atualPage, setAtualPage,atualUserEditing,setAtualUserEditin,isEditing,setIsEditing }}>
+        <GlobalContext.Provider value={{dashboardAtualPage, setDashboardPage ,textNavTop, setTextNavTop, users, setUsers,atualPage, setAtualPage,atualUserEditing,setAtualUserEditin,isEditing,setIsEditing }}>
             {children}
         </GlobalContext.Provider>
     )
