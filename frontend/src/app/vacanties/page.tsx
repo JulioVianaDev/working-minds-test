@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import Aside from '../userlist/components/Aside'
 import NavbarTop from '../userlist/components/NavbarTop'
-import ButtonTop from './components/ButtontopVacanty'
+import ButtonTop from '../dashboard/components/ButtontopVacanty'
 import { useGlobalContext } from '../context/store'
 import { NEW_VACANTY_TYPE,VACANTY_LIST_TYPE,EDIT_VACANTY_TYPE } from '../context/typesVacantis'
-import VacanciesList from './components/VacanciesList'
-import NewFerias from './components/NewFerias'
 import { getUsersWithVacanties } from '../hooks/getUsersWithVatanties'
+import ListVacanties from './components/ListVacanties'
 
 function Dashboard() {
   const [users,setUsers] = useState([])
@@ -20,9 +19,9 @@ function Dashboard() {
 
   var currentPageComponent;
   if (dashboardAtualPage == VACANTY_LIST_TYPE) {
-    currentPageComponent = <VacanciesList/> ;
+    currentPageComponent = <ListVacanties/> ;
   } else if (dashboardAtualPage === NEW_VACANTY_TYPE) {
-    currentPageComponent = <NewFerias/>;
+    currentPageComponent = <p>Criar ferias</p>;
   } else if (dashboardAtualPage === EDIT_VACANTY_TYPE) {
     currentPageComponent = <p>Editar</p>;
   } else {
@@ -36,6 +35,7 @@ function Dashboard() {
         <div>
           <main className="">
             <NavbarTop/>
+            <ButtonTop/>
             <div>
               {currentPageComponent}
             </div>

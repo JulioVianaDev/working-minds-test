@@ -15,24 +15,6 @@ function Aside() {
       </div>
       <div onClick={()=>setTextNavTop('Cadastrar Férias')}><Link href='/dashboard'>Dashboard</Link></div>
     </div>
-    <div className='flex w-nav-aside h-nav-aside pl-icons-left items-center'>
-      <div  className='mr-icons-right'>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <path fillRule="evenodd" clipRule="evenodd" d="M12.5 5.83337V9.16671H13.3333V10.8334H10.8333V4.16671H12.5L10 0.833374L7.5 4.16671H9.16667V10.8334H6.66667V9.10837C7.25 8.80004 7.66667 8.20837 7.66667 7.50004C7.66667 6.49171 6.84167 5.66671 5.83333 5.66671C4.825 5.66671 4 6.49171 4 7.50004C4 8.20837 4.41667 8.80004 5 9.10837V10.8334C5 11.7584 5.74167 12.5 6.66667 12.5H9.16667V15.0417C8.575 15.35 8.16667 15.9584 8.16667 16.6667C8.16667 17.6834 8.99167 18.5 10 18.5C11.0083 18.5 11.8333 17.6834 11.8333 16.6667C11.8333 15.9584 11.425 15.35 10.8333 15.0417V12.5H13.3333C14.2583 12.5 15 11.7584 15 10.8334V9.16671H15.8333V5.83337H12.5Z" fill="white"/>
-        </svg>
-
-      </div>
-      <div>Network</div>
-    </div>
-    <div className='flex w-nav-aside h-nav-aside pl-icons-left items-center'>
-      <div  className='mr-icons-right'>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" clipRule="evenodd" d="M12.5 5.83337H15.8333V14.1667H12.5V5.83337Z" fill="#28A745" fillOpacity="0.3"/>
-        <path fillRule="evenodd" clipRule="evenodd" d="M2.5 10.8333H9.16667V12.5H2.5V10.8333ZM2.5 14.1666H9.16667V15.8333H2.5V14.1666ZM2.5 7.49996H9.16667V9.16663H2.5V7.49996ZM2.5 4.16663H9.16667V5.83329H2.5V4.16663ZM10.8333 4.16663V15.8333H17.5V4.16663H10.8333ZM15.8333 14.1666H12.5V5.83329H15.8333V14.1666Z" fill="white"/>
-        </svg>
-      </div>
-      <div>List Doc</div>
-    </div>
     <div onClick={()=>{setTextNavTop('User List');setAtualPage(USER_LIST_TYPE)}} className='hover:cursor-pointer flex w-nav-aside h-nav-aside pl-icons-left items-center bg-purple rounded-r-choose'>
       <div  className='mr-icons-right'>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +31,7 @@ function Aside() {
         <path fillRule="evenodd" clipRule="evenodd" d="M17.5 13.3334V11.6667L10.8333 7.50002V2.91669C10.8333 2.22502 10.275 1.66669 9.58329 1.66669C8.89163 1.66669 8.33329 2.22502 8.33329 2.91669V7.50002L1.66663 11.6667V13.3334L8.33329 11.25V15.8334L6.66663 17.0834V18.3334L9.58329 17.5L12.5 18.3334V17.0834L10.8333 15.8334V11.25L17.5 13.3334Z" fill="white"/>
         </svg>
       </div>
-      <div>Deliveries</div>
+      <div><Link href='/vacanties'>Férias</Link></div>
     </div>
   </aside>
   )

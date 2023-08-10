@@ -1,17 +1,18 @@
 import { useGlobalContext } from '@/app/context/store'
 import { getUsersWithVacanties } from '@/app/hooks/getUsersWithVatanties'
-import {User} from './UserRow'
 import React,{useEffect,useState} from 'react'
 import { Roboto } from 'next/font/google';
-import UserRow from './UserRow'
-import { useApi } from '@/app/hooks/useApi';
 
+import { useApi } from '@/app/hooks/useApi';
+import VacantiesRow from './VacantiesRow';
+import { User } from './VacantiesRow';
+import { useGetVacations } from '@/app/hooks/useGetVacations';
 const roboto = Roboto({weight: "500",subsets: ["latin"], style: "normal"})
 function VacanciesList() {
   const {} = useGlobalContext()
   const [users,setUsers] = useState<User[]>([])
   useEffect(()=>{
-    let usersApi = useApi().then(res=>setUsers(res))
+    let usersApi = useGetVacations().then(res=>setUsers(res))
   },[])
 
   return (
@@ -24,7 +25,7 @@ function VacanciesList() {
         <rect x="19.5" y="15.5" width="19" height="19" rx="1.5" fill="white" stroke="#6C757D"/>
         </svg>
       </div>
-      <div className='flex items-center h-nav-aside w-profile border-b-2 border-gray-300'>Profile</div>
+      
       <div className='flex relative justify-between items-center h-nav-aside w-nome border-b-2 border-gray-300'>
         <div>Nome</div> 
         <div className='absolute top-2 right-4'>
@@ -39,7 +40,7 @@ function VacanciesList() {
       <div className='flex justify-center items-center h-nav-aside w-action border-b-2 border-gray-300'>Action</div>
     </div>
       {
-        users.map(u=><UserRow key={u._id} {...u}/>)
+        users.map(u=><VacantiesRow key={u._id} {...u}/>)
       }
     </div>
   )

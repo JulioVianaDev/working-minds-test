@@ -5,7 +5,9 @@ const vacationSchema = new mongoose.Schema({
     end: Date,
     days: Number,
     userId: String,
-    createdAt: { type: Date,default: Date.now }
+    createdAt: { type: Date,default: Date.now },
+    userName: String,
+    imageUrl: String
 })
 
 
