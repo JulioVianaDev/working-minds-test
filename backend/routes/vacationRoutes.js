@@ -6,6 +6,7 @@ router.post('/createVacation',vacationController.createVacantion)
 router.delete('/deleteVacation/:id',vacationController.deleteVacation)
 router.patch('/editVacation/:id',vacationController.editUser)
 router.get('/vacationsUser/:id',vacationController.getVacationsForUser)
+router.get('/usersWithVacations',vacationController.getUsersWithVacations)
 
 
 module.exports  = router

@@ -1,5 +1,5 @@
 const Vacation = require('../models/Vacation')
-
+const User = require('../models/User')
 module.exports = class VacationController{
   static async getVacations(req,res){
     const allVacations = await Vacation.find()
@@ -72,5 +72,23 @@ module.exports = class VacationController{
   static async getVacationsForUser(req,res){
     const vacations = await Vacation.find({userId:  req.params.id})
     res.status(200).json(vacations)
+  }
+  static async getUsersWithVacations(req,res){
+    try {
+      const vacations = await Vacation.find()
+      const users = await User.find()
+      const uniqueUserIdsSet = new Set();
+      vacations.forEach(vacation => {
+        uniqueUserIdsSet.add(vacation.userId);
+      });
+
+      // Convert the set to an array
+      const userIDList = Array.from(uniqueUserIdsSet);
+      const filteredUsers = users.filter(user => userIDList.includes(user._id.toString()));
+      res.json(filteredUsers);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error while fetching users with vacations.' });
+    }
   }
 }
