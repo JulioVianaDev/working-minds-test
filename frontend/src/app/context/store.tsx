@@ -4,6 +4,7 @@
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 import { USER_LIST_TYPE } from "./typesPages";
 import { NEW_VACANTY_TYPE, VACANTY_LIST_TYPE } from "./typesVacantis";
+import { ASIDE_USER_LIST } from "./typesAside";
 
 export interface User {
     _id: string,
@@ -13,7 +14,7 @@ export interface User {
     imageUrl: string,
     createdAt: string,
     __v: number,
-    image: string | File
+    image: string | File,
   }
 
 interface ContextProps {
@@ -29,6 +30,8 @@ interface ContextProps {
     isEditing: boolean,
     setIsEditing: Dispatch<SetStateAction<boolean>>,
     setAtualUserEditin: Dispatch<SetStateAction<User>>,
+    asideClicked: string,
+    setAsideClicked: Dispatch<SetStateAction<string>>,
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -44,6 +47,8 @@ const GlobalContext = createContext<ContextProps>({
     setIsEditing: ()=>{},
     atualUserEditing: {_id: '',name: '',hiring: '',days:0,image: '', createdAt: '',  __v: 0,imageUrl: '',},
     setAtualUserEditin: ()=>{},
+    asideClicked: "UserList",
+    setAsideClicked: ()=>{},
 })
 
 export const GlobalContextProvider = ({ children }:any) => {
@@ -52,10 +57,10 @@ export const GlobalContextProvider = ({ children }:any) => {
     const [dashboardAtualPage, setDashboardPage] = useState(VACANTY_LIST_TYPE);
     const [users, setUsers] = useState<[] | User[]>([]);
     const [isEditing,setIsEditing] = useState(false)
-    
+    const [asideClicked,setAsideClicked] = useState(ASIDE_USER_LIST)
     const [atualUserEditing,setAtualUserEditin] = useState<User>({_id: '',name: '',hiring: '',days:0,image: '', createdAt: '',  __v: 0,imageUrl: '',})
     return (
-        <GlobalContext.Provider value={{dashboardAtualPage, setDashboardPage ,textNavTop, setTextNavTop, users, setUsers,atualPage, setAtualPage,atualUserEditing,setAtualUserEditin,isEditing,setIsEditing }}>
+        <GlobalContext.Provider value={{asideClicked,setAsideClicked,dashboardAtualPage, setDashboardPage ,textNavTop, setTextNavTop, users, setUsers,atualPage, setAtualPage,atualUserEditing,setAtualUserEditin,isEditing,setIsEditing }}>
             {children}
         </GlobalContext.Provider>
     )

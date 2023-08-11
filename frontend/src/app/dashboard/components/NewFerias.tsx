@@ -77,7 +77,7 @@ function NewFerias() {
                 </div>
               </div>
               <div className='flex mt-8 justify-end w-full '>
-                <div onClick={()=>{setTextNavTop("Users Ferias List");setDashboardPage(VACANTY_LIST_TYPE)}} className={`${roboto.className} hover:cursor-pointer w-[99px] mr-6 h-[44px] py-[7px] text-[16px] px-[15px] border border-[#000] flex justify-center items-center rounded-[20px]`}>Cancel</div>
+                <div onClick={()=>{setTextNavTop("Dashboard de férias");setDashboardPage(VACANTY_LIST_TYPE)}} className={`${roboto.className} hover:cursor-pointer w-[99px] mr-6 h-[44px] py-[7px] text-[16px] px-[15px] border border-[#000] flex justify-center items-center rounded-[20px]`}>Cancel</div>
                 <button type='submit' className={`${roboto.style.fontFamily} hover:cursor-pointer text-[16px] text-white bg-[#9747FF] w-[210px] h-[44px] rounded-[20px] flex justify-center items-center`}>Save</button>
               </div>
             </div>
