@@ -71,11 +71,33 @@ module.exports = class VacationController{
   }
   static async deleteVacation(req,res){
     try {
-      const vacation = await Vacation.findByIdAndRemove(req.params.id)
+      // const vacation = await Vacation.findByIdAndRemove(req.params.id)
+      // if (!vacation) {
+      //   return res.status(404).json({ message: "ferias não encontrado" });
+      // }
+      //  res.status(200).json({ message: "ferias excluído com sucesso" });
+      const vacation = await Vacation.findById(req.params.id);
+
       if (!vacation) {
-        return res.status(404).json({ message: "ferias não encontrado" });
+          return res.status(404).json({ message: "ferias não encontrado" });
       }
-       res.status(200).json({ message: "ferias excluído com sucesso" });
+
+      const days = vacation.days; // Save the days before deleting
+      const userId = vacation.userId
+
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(400).json({ message: "User not found." });
+      }
+      
+      user.days += days;
+      await user.save();
+      await Vacation.findByIdAndDelete(req.params.id); // Delete the vacation
+
+      // Now you can use the 'days' value as needed, for example, to update user's available days
+
+      res.status(200).json({ message: "ferias excluído com sucesso" });
     } catch (error) {
       console.error(error);
        res.status(500).json({ message: "Ocorreu um erro ao excluir o ferias" });
