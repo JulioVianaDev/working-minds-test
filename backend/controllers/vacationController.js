@@ -23,6 +23,26 @@ module.exports = class VacationController{
     if (timeDifferenceInDays < days - 1) {
       return res.status(400).json({ message: "Invalid date range. Difference between start and end should be at least 1 day greater than 'days'." });
     }
+
+    const existingVacation = await Vacation.findOne({
+      userId: userId,
+      $or: [
+          { start: { $lte: endDate }, end: { $gte: startDate } },
+          { start: { $lte: startDate }, end: { $gte: endDate } }
+      ]
+      });
+
+      if (existingVacation) {
+          return res.status(400).json({ message: "There is already a vacation for this user that overlaps with the provided date range." });
+      }
+      const userVacations = await Vacation.find({ userId: userId });
+
+      if (userVacations.length === 0 && days < 14) {
+          return res.status(400).json({ message: "The first vacation should have a duration of at least 14 days." });
+      } else if (userVacations.length > 0 && days < 5) {
+          return res.status(400).json({ message: "Subsequent vacations should have a duration of at least 5 days." });
+      }
+  
     const vacancy = new Vacation({
       start,
       end,
@@ -67,7 +87,7 @@ module.exports = class VacationController{
     res.status(200).json(vacations)
   }
   static async getUsersWithVacations(req,res){
-    try {
+    try { 
       const vacations = await Vacation.find()
       const users = await User.find()
       const uniqueUserIdsSet = new Set();

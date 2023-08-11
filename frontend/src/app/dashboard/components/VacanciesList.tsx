@@ -38,9 +38,11 @@ function VacanciesList() {
       <div className='flex justify-center items-center h-nav-aside w-status border-b-2 border-gray-300'>Status</div>
       <div className='flex justify-center items-center h-nav-aside w-action border-b-2 border-gray-300'>Action</div>
     </div>
+    <div className='overflow-y-scroll h-[400px]'>
       {
         users.map(u=><UserRow key={u._id} {...u}/>)
       }
+    </div>
     </div>
   )
 }

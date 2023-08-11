@@ -29,7 +29,7 @@ function Dashboard() {
     currentPageComponent = <div>404 - Page not found</div>;
   }
   return (
-    <div className='h-screen primary	relative  flex flex-col'>
+    <div className='h-screen primary relative  flex flex-col'>
       <div className="flex ">
         <Aside/>
         <div>
