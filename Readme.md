@@ -32,3 +32,6 @@
   <li>Test Coverage backend/frontend </li>
 </ul>
 
+# If you use docker-compose you can up the containers with:
+
+````docker-compose up``
